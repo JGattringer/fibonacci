@@ -1,8 +1,13 @@
+"""for the test work had to take out the input from user and change it for a parameter called iterator.
+had to add it to the __init__ function,  changing from just (self) for (self, iterator), in the end of the program
+ you can add the number of iterations that you want for the pytest run it"""
+
+import pytest
 class Fibonacci:
-    def __init__(self):
+    def __init__(self, iterator):
         self.before = 0
         self.next = 1
-        self.iterator = int(input("Type the number of characters that you wish to perform the Fibonacci sequence! "))
+        self.iterator = iterator
 
     def __iter__(self):
         return self
@@ -27,4 +32,11 @@ class Test_Fibonacci:
         test = {k + 1: v for k, v in enumerate(next(sequence))}
         return test
 
-print(Test_Fibonacci.generate())
+def test_fibonacci_sequence():
+    iterator = 10  # Define the number of iterations desired for the test run
+    generator = Fibonacci(iterator)
+    sequence = iter(generator)
+    result = next(sequence)
+    assert len(result) == iterator
+
+pytest
